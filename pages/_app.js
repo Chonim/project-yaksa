@@ -5,6 +5,9 @@ import '@fontsource/roboto/700.css';
 import '../styles/globals.css'
 import Header from 'components/common/Header'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+
 
 const theme = createTheme({
   palette: {
@@ -12,14 +15,21 @@ const theme = createTheme({
   },
 });
 
-
 function MyApp({ Component, pageProps }) {
+  const router = useRouter()
+  const isLoginPage = router.asPath === '/login'
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Component {...pageProps} />
+      {!isLoginPage && <Header />}
+      <Main>
+        <Component {...pageProps} />
+      </Main>
     </ThemeProvider>
   )
 }
+
+const Main = styled.main`
+  padding: 1rem;
+`
 
 export default MyApp
