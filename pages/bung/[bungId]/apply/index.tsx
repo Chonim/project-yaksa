@@ -1,7 +1,12 @@
 import { Button, Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextField } from '@mui/material'
+import Router from 'next/router';
 import React from 'react'
 
 const BungApplyPage = () => {
+  const apply = () => {
+    const { bungId } = Router.query
+    Router.push(`/bung/${bungId}`)
+  }
   return (
     <div>
       <FormControl sx={{ m: 1, width: 'calc(100% - 1rem)', mt: 3 }}>
@@ -19,7 +24,7 @@ const BungApplyPage = () => {
           <FormControlLabel control={<Checkbox defaultChecked />} label="추노여부" />
         </div>
 
-        <Button variant='contained'>참가하기</Button>
+        <Button variant='contained' onClick={apply}>참가하기</Button>
       </FormControl>
     </div>
   )
